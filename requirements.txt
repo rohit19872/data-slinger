@@ -1,6 +1,5 @@
-Django==3.1.14
-mysqlclient==2.0.3
-uWSGI==2.0.19.1
-setuptools==53.1.0
-boto3==1.17.17
-requests==2.25.1
+Django==4.2.16
+mysqlclient==2.2.4
+uWSGI==2.0.26
+setuptools==75.1.0
+requests==2.32.3
