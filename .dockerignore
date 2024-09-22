@@ -1,0 +1,13 @@
+.git/
+**/*.md
+**/Dockerfile
+.gitignore
+build/
+**/*.tar
+.idea/
+db/
+logs/
+venv/
+.vscode/
+middleware/middleware/static/
+.github/
