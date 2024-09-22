@@ -2,6 +2,8 @@ from django.http import HttpResponse
 import json
 import requests
 
+# from .auth import Auth
+
 
 def index(request):
     return HttpResponse("Hello, world!")
@@ -20,7 +22,7 @@ def recieve_event(request):
     if appointment_id is None:
         return HttpResponse("Hello, world2!")
     
-    access_token = request.auth.login()
+    access_token = Auth().login()
 
     url = "https://api.eka.care/dr/v1/business/appointments/{}".format(appointment_id)
     headers = {"auth": access_token}
