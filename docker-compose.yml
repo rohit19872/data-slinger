@@ -5,8 +5,9 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
-
+      - 80:80
+    expose:
+      - 80
     depends_on:
       mysql:
         condition: service_healthy
