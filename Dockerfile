@@ -27,7 +27,6 @@ COPY ./requirements.txt requirements.txt
 RUN python3 -m pip install -r requirements.txt
 
 # Copy configuration files for uWSGI
-COPY dockerconfig/uwsgi_params /etc/nginx/uwsgi_params
 COPY dockerconfig/uwsgi_middleware.ini /etc/uwsgi_middleware.ini
 
 # Copy the application code
