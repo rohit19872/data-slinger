@@ -9,7 +9,7 @@ def index(request):
     return HttpResponse("Hello, world!")
 
 
-def recieve_event(request):
+def receive_event(request):
     if request.method != "POST":
         return HttpResponse("Hello, world2!")
 
