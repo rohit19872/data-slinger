@@ -14,7 +14,7 @@ RUN rm -f /etc/localtime \
     && ln -s /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 
 # Create necessary directories for logs and middleware
-RUN mkdir -p /logs/middleware/ /logs/
+RUN mkdir -p /logs/middleware/
 
 # Upgrade pip
 RUN python3 -m pip install --upgrade pip
