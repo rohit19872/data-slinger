@@ -1,11 +1,12 @@
+import os
 import requests
 
 
 class Auth(object):
     def __init__(self):
-        self.api_key = "5a8890b0-f02c-440a-a708-41b6fcaff3d8"
-        self.client_id = "testing"
-        self.client_secret = "d128c12a-d90d-4012-968a-8d14f1ddd57c"
+        self.api_key = os.environ.get("API_KEY")
+        self.client_id = os.environ.get("CLIENT_ID")
+        self.client_secret = os.environ.get("CLIENT_SECRET")
 
     def login(self):
         url = 'https://api.eka.care/connect-auth/v1/account/login'
