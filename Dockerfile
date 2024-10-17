@@ -7,6 +7,7 @@ RUN apt-get update \
     libmariadb-dev \
     default-mysql-client \
     pkg-config \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Set timezone to Asia/Kolkata
