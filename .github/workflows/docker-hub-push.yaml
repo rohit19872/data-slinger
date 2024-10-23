@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: docker-hub-push
 
 on:
   push:
@@ -43,9 +43,9 @@ jobs:
         run: |
           docker buildx build --platform $PLATFORMS -t $DOCKER_REGISTRY/$DOCKER_REPO:$IMAGE_TAG --push -f Dockerfile .
 
-      - name: Show image digest
-        env:
-          IMAGE_TAG: ${{ steps.get_version.outputs.VERSION }}
+      # - name: Show image digest
+      #   env:
+      #     IMAGE_TAG: ${{ steps.get_version.outputs.VERSION }}
       
-        run: |
-          docker buildx imagetools inspect $IMAGE_TAG
+      #   run: |
+      #     docker buildx imagetools inspect $IMAGE_TAG
