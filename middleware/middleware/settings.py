@@ -28,6 +28,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
 
+SESSION_COOKIE_DOMAIN = ALLOWED_HOSTS[0]
+CSRF_TRUSTED_ORIGINS = [
+    'https://'+SESSION_COOKIE_DOMAIN,
+]
+SITE_URL = 'https://'+SESSION_COOKIE_DOMAIN
+
+AUTHENTICATION_BACKENDS = [
+    #'middleware.medanta_auth.MedantaAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +51,7 @@ INSTALLED_APPS = [
     'webapp',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -49,6 +61,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if os.getenv('CUSTOM_LOGIN', None) == 'true':
+    CORS_ALLOW_ALL_ORIGINS = True
+    INSTALLED_APPS += ['corsheaders','oidc_provider']
+    MIDDLEWARE  += ['corsheaders.middleware.CorsMiddleware']
+
 
 ROOT_URLCONF = 'middleware.urls'
 
@@ -156,3 +174,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = str(BASE_DIR) + '/static/'
+
