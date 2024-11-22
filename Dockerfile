@@ -8,20 +8,7 @@ RUN apt-get update \
     default-mysql-client \
     pkg-config \
     curl \
-    libaio1 \
-    unzip \
     && rm -rf /var/lib/apt/lists/*
-
-# Download the Oracle Instant Client (adjust URL for your version)
-RUN curl -L -o instantclient-basic-linux.x64.zip \
-    https://download.oracle.com/otn_software/linux/instantclient/2350000/instantclient-basic-linux.x64-23.5.0.24.07.zip
-
-# Unzip and configure the Oracle Instant Client
-RUN unzip instantclient-basic-linux.x64.zip -d /opt/oracle \
-    && rm instantclient-basic-linux.x64.zip
-ENV LD_LIBRARY_PATH=/opt/oracle/instantclient
-RUN echo /opt/oracle/instantclient_23_5 > /etc/ld.so.conf.d/oracle-instantclient.conf \
-    && ldconfig
 
 # Set timezone to Asia/Kolkata
 RUN rm -f /etc/localtime \
