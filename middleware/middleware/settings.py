@@ -30,12 +30,11 @@ ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
 
 SESSION_COOKIE_DOMAIN = ALLOWED_HOSTS[0]
 CSRF_TRUSTED_ORIGINS = [
-    'https://'+SESSION_COOKIE_DOMAIN,
+    os.getenv('SITE_URL', 'https://'+SESSION_COOKIE_DOMAIN),
 ]
-SITE_URL = 'https://'+SESSION_COOKIE_DOMAIN
+SITE_URL = os.getenv('SITE_URL', 'https://'+SESSION_COOKIE_DOMAIN)
 
 AUTHENTICATION_BACKENDS = [
-    #'middleware.medanta_auth.MedantaAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -64,7 +63,7 @@ MIDDLEWARE = [
 
 if os.getenv('CUSTOM_LOGIN', None) == 'true':
     CORS_ALLOW_ALL_ORIGINS = True
-    INSTALLED_APPS += ['corsheaders','oidc_provider']
+    INSTALLED_APPS += ['corsheaders', 'oidc_provider']
     MIDDLEWARE  += ['corsheaders.middleware.CorsMiddleware']
 
 
