@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path("webapp/", include("webapp.urls"), namespace='webapp'),
+    path("webapp/", include("webapp.urls", namespace='webapp')),
     path('admin/', admin.site.urls),
     path('oidc/', include('oidc_provider.urls', namespace='oidc_provider')),
 ]
