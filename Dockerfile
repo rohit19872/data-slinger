@@ -39,14 +39,5 @@ RUN python3 manage.py collectstatic --noinput
 # Expose port 80 for HTTP traffic
 EXPOSE 80
 
-# Create a non-root user and group
-RUN groupadd -r ekacare && useradd -r -g ekacare ekacare
-
-# Set ownership of application files to the non-root user
-RUN chown -R ekacare:ekacare /usr/local/eka/middleware /logs/middleware
-
-# Switch to the non-root user
-USER ekacare
-
-# Start uWSGI as the non-root user
+# Start uWSGI.
 CMD ["/usr/local/bin/uwsgi", "--ini", "/etc/uwsgi_middleware.ini"]
