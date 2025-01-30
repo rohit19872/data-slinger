@@ -6,7 +6,9 @@ RUN apt-get update \
     build-essential \
     libmariadb-dev \
     default-mysql-client \
+    python3-dev \
     pkg-config \
+    libssl-dev \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
