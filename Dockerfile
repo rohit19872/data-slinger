@@ -9,6 +9,7 @@ RUN apt-get update \
     python3-dev \
     pkg-config \
     libssl-dev \
+    libpcre3-dev \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
