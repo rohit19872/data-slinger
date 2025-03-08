@@ -195,7 +195,7 @@ if os.getenv('OTEL_EXPORTER_OTLP_ENDPOINT', None):
     resource = Resource(attributes={"service.name": os.getenv("SERVICE_NAME")})
     tracer_provider = TracerProvider(resource=resource)
     span_processor = BatchSpanProcessor(
-        OTLPSpanExporter(endpoint=OTLP_ENDPOINT, headers={"api-key", OLTP_API_KEY})
+        OTLPSpanExporter(endpoint=OTLP_ENDPOINT, headers=(("api-key", OLTP_API_KEY),),)
     )
 
     trace.set_tracer_provider(tracer_provider)
