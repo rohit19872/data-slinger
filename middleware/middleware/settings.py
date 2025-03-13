@@ -197,16 +197,12 @@ if os.getenv('OTEL_EXPORTER_OTLP_ENDPOINT', None):
 
     # Setup OpenTelemetry Tracer
     resource = Resource(attributes={"service.name": os.getenv("SERVICE_NAME")})
-    tracer_provider = TracerProvider(resource=resource)
     span_processor = BatchSpanProcessor(
         OTLPSpanExporter(endpoint=OTLP_ENDPOINT, headers=(("api-key", OLTP_API_KEY),),)
     )
 
-    trace.set_tracer_provider(tracer_provider)
-    tracer_provider.add_span_processor(span_processor)
-
-    # Apply OpenTelemetry Instrumentation
-    DjangoInstrumentor().instrument()
+    trace.set_tracer_provider(TracerProvider(resource=resource))
+    trace.get_tracer_provider().add_span_processor(span_processor)
 
     # Set up OpenTelemetry Metric Exporter
     metric_exporter = OTLPMetricExporter(endpoint=f"{OTLP_ENDPOINT}/v1/metrics", headers=(("api-key", OLTP_API_KEY),),)
@@ -215,6 +211,9 @@ if os.getenv('OTEL_EXPORTER_OTLP_ENDPOINT', None):
     # Configure Meter Provider
     meter_provider = MeterProvider(resource=resource, metric_readers=[reader])
     set_meter_provider(meter_provider)
+
+    # Apply OpenTelemetry Instrumentation
+    DjangoInstrumentor().instrument()
 
     # Ensure OpenTelemetry cleans up properly on exit
     atexit.register(meter_provider.shutdown)
