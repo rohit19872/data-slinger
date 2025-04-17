@@ -3,10 +3,13 @@
 import os
 import sys
 
+from middleware.otel import initialize_telemetry
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'middleware.settings')
+
+    initialize_telemetry()
 
     try:
         from django.core.management import execute_from_command_line
